@@ -1,0 +1,26 @@
+<header>
+    <div>
+        <h1 routerLink="/">MatchWork</h1>
+    </div>
+    <nav class="navbar">
+        <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
+    </nav>
+</header>
+
+<div class="sidebar" [class.open]="isSideBarOpen">
+    <a id="login" routerLink="/cadastro">Login</a>
+    <a>Meu currículo</a>
+    <a>Minhas Candidaturas</a>
+    <a>Minha empresa</a>
+    <a>Minhas vagas</a>
+</div>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<div class="overlay" [class.active]="isSideBarOpen" (click)="toggleSidebar()"></div>
+
+<footer>
+    <p>Você vai encontrar seu novo emprego aqui!</p>
+</footer>

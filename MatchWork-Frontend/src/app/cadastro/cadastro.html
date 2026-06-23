@@ -1,0 +1,141 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit()">
+        <div class="toggle-buttons">
+            <button 
+                type="button" 
+                class="toggle-btn" 
+                [class.active]="showUserForm"
+                (click)="showUserOnly()">
+                Usuário
+            </button>
+            <button 
+                type="button" 
+                class="toggle-btn" 
+                [class.active]="showCompanyForm"
+                (click)="showCompanyOnly()">
+                Empresa
+            </button>
+        </div>
+
+        @if (showUserForm) {
+            <div class="cad">
+                <h2>Usuário</h2>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="name">Nome</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name"
+                            [(ngModel)]="user.name" 
+                            placeholder="Ex: Mariana"
+                            >
+                    </div>
+                    <div class="campo">
+                        <label for="age">Idade</label>
+                        <input 
+                            type="number" 
+                            name="age" 
+                            id="age"
+                            [(ngModel)]="user.age" 
+                            placeholder="Mín: 18" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="addres">Endereço</label>
+                        <input 
+                            type="text" 
+                            id="addres" 
+                            name="addres" 
+                            [(ngModel)]="user.addres"
+                            placeholder="Ex: QNM 15 Conjunto C">
+                    </div>
+                    <div class="campo">
+                        <label for="cpf">CPF</label>
+                        <input 
+                            type="text" 
+                            id="cpf" 
+                            name="cpf"
+                            [(ngModel)]="user.cpf" 
+                            placeholder="EX: 123.445.213.77" mask="000.000.000-00">
+                    </div>
+                </div>
+                <div class="form-row-full">
+                    <div class="campo">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            [(ngModel)]="user.email" 
+                            placeholder="Ex: may@email.com">
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (showCompanyForm) {
+            <div class="cad">
+                <h2>Empresa</h2>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="name_e">Nome</label>
+                        <input 
+                            type="text" 
+                            id="name_e" 
+                            name="name_e"
+                            [(ngModel)]="enterprise.name"
+                            placeholder="Ex: Softwise Ltda.">
+                    </div>
+                    <div class="campo">
+                        <label for="description">Descrição</label>
+                        <input 
+                            type="text" 
+                            id="description" 
+                            name="description"
+                            [(ngModel)]="enterprise.description"
+                            placeholder="Ex: Empresa atuando na área Tecnológica">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="location">Localização</label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            name="localtion"
+                            [(ngModel)]="enterprise.location" 
+                            placeholder="Ex: Rua SD-1 Avenida Alagoas">
+                    </div>
+                    <div class="campo">
+                        <label for="cnpj">CNPJ</label>
+                        <input 
+                            type="text" 
+                            id="cnpj" 
+                            name="cnpj" 
+                            [(ngModel)]="enterprise.cnpj"
+                            placeholder="Ex: 00.000.000/0000.00" 
+                            mask="00.000.000/0000.00">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="poBox">Caixa Postal</label>
+                        <input 
+                            type="text" 
+                            name="poBox" 
+                            id="poBox"
+                            [(ngModel)]="enterprise.poBox" 
+                            placeholder="Ex: Rua 375 Dott hun">
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="buttons">
+            <button type="submit">Salvar</button>
+            <button id="clear" type="button" (click)="clearForms()">Limpar</button>
+        </div>
+    </form>
+</div>
