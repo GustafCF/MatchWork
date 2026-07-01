@@ -5,10 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.br.MatchWork.entity.Enterprise;
+import com.br.MatchWork.entity.Login;
 
 @Repository
-public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
-
-    Optional<Enterprise> findByName(String name);
+public interface LoginRepository extends JpaRepository<Login, Long> {
+    Optional<Login> findByEmail(String email);
 }

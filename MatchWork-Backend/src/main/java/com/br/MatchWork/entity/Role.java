@@ -1,48 +1,36 @@
 package com.br.MatchWork.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_ENTERPRISE")
-public class Enterprise {
-
+@Table(name = "TB_ROLES")
+public class Role {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
-    private String location;
-    private String cnpj;
-    private String poBox;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
-    private Set<Job> jobs = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private List<Login> login = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Login login;
+    public Role() {}
 
-    public Enterprise() {}
-
-    public Enterprise(String name, String description, String location, String cnpj, String poBox, Login login) {
+    public Role(String name, String description) {
         this.name = name;
         this.description = description;
-        this.location = location;
-        this.cnpj = cnpj;
-        this.poBox = poBox;
-        this.login = login;
     }
 
     public Long getId() {
@@ -69,40 +57,8 @@ public class Enterprise {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getPoBox() {
-        return poBox;
-    }
-
-    public void setPoBox(String poBox) {
-        this.poBox = poBox;
-    }
-
-    public Set<Job> getJobs() {
-        return jobs;
-    }
-
-    public Login getLogin() {
+    public List<Login> getLogin() {
         return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
     }
 
     @Override
@@ -121,7 +77,7 @@ public class Enterprise {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Enterprise other = (Enterprise) obj;
+        Role other = (Role) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

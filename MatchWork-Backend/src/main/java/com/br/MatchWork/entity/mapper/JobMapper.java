@@ -1,5 +1,7 @@
 package com.br.MatchWork.entity.mapper;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 
 import com.br.MatchWork.entity.Job;
@@ -18,7 +20,7 @@ public class JobMapper {
             request.additionalInfo(),
             request.jobModel(),
             request.typeContract(),
-            request.date()
+            LocalDate.now()
         );
     }
 
@@ -29,6 +31,7 @@ public class JobMapper {
             job.getResponsibility(),
             job.getRequirements(),
             job.getAdditionalInfo(),
+            job.getSteps(),
             job.getJobModel(),
             job.getTypeContract(),
             job.getDate()
@@ -56,9 +59,6 @@ public class JobMapper {
         }
         if(dto.typeContract() != null) {
             job.setTypeContract(dto.typeContract());
-        }
-        if(dto.date() != null) {
-            job.setDate(dto.date());
         }
     }
 }

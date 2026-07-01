@@ -4,7 +4,6 @@ public record UserResponseDto (
     String name,
     Integer age,
     String addres,
-    String cpf,
-    String email
+    String cpf
 ) 
 {}

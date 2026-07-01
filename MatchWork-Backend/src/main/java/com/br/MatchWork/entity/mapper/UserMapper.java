@@ -1,7 +1,9 @@
 package com.br.MatchWork.entity.mapper;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.br.MatchWork.entity.Login;
 import com.br.MatchWork.entity.User;
 import com.br.MatchWork.entity.dtos.UserRequestDto;
 import com.br.MatchWork.entity.dtos.UserResponseDto;
@@ -9,13 +11,19 @@ import com.br.MatchWork.entity.dtos.UserResponseDto;
 @Component
 public class UserMapper {
 
+    private final BCryptPasswordEncoder encode;
+
+    public UserMapper(BCryptPasswordEncoder encode) {
+        this.encode = encode;
+    }
+
     public User toEntity(UserRequestDto request) {
         return new User(
             request.name(),
             request.age(),
             request.addres(),
             request.cpf(),
-            request.email()
+            new Login(request.email(), encode.encode(request.password()))
         );
     }
 
@@ -24,8 +32,7 @@ public class UserMapper {
             user.getName(),
             user.getAge(),
             user.getAddres(),
-            user.getCpf(),
-            user.getEmail()
+            user.getCpf()
         );
     }
 
@@ -41,9 +48,6 @@ public class UserMapper {
         }
         if(!dto.cpf().isBlank()){
             user.setCpf(dto.cpf());
-        }
-        if(!dto.email().isBlank()){
-            user.setEmail(dto.email());
         }
     }
 }

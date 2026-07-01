@@ -1,13 +1,21 @@
 package com.br.MatchWork.entity.mapper;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.br.MatchWork.entity.Enterprise;
+import com.br.MatchWork.entity.Login;
 import com.br.MatchWork.entity.dtos.EnterpriseRequestDto;
 import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 
 @Component
 public class EnterpriseMapper {
+
+    private final BCryptPasswordEncoder encode;
+
+    public EnterpriseMapper(BCryptPasswordEncoder encode) {
+        this.encode = encode;
+    }
     
     public Enterprise toEntity(EnterpriseRequestDto request) {
         return new Enterprise(
@@ -15,7 +23,8 @@ public class EnterpriseMapper {
             request.description(),
             request.location(),
             request.cnpj(),
-            request.poBox()
+            request.poBox(),
+            new Login(request.email(), encode.encode(request.password()))
         );
     }
 

@@ -1,13 +1,15 @@
 package com.br.MatchWork.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 
@@ -23,17 +25,22 @@ public class User {
     private Integer age;
     private String addres;
     private String cpf;
-    private String email;
-    private String password;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Login login;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job jobs;
 
     public User() {}
 
-    public User(String name, @Min(value = 18, message = "Idade miníma: 18 Anos") Integer age, String addres, String cpf, String email) {
+    public User(String name, @Min(value = 18, message = "Idade miníma: 18 Anos") Integer age, String addres, String cpf, Login login) {
         this.name = name;
         this.age = age;
         this.addres = addres;
         this.cpf = cpf;
-        this.email = email;
+        this.login = login;
     }
 
     public Long getId() {
@@ -76,20 +83,20 @@ public class User {
         this.age = age;
     }
 
-    public String getEmail() {
-        return email;
+    public Job getJobs() {
+        return jobs;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setJobs(Job jobs) {
+        this.jobs = jobs;
     }
 
-    public String getPassword() {
-        return password;
+    public Login getLogin() {
+        return login;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     @Override

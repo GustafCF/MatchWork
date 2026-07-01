@@ -7,10 +7,14 @@ import java.util.Set;
 import com.br.MatchWork.entity.enums.JobModel;
 import com.br.MatchWork.entity.enums.TypeContract;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,10 +29,18 @@ public class Job {
     private String responsibility;
     private String Requirements;
     private String additionalInfo;
-    private Set<String> processSteps = new HashSet<>();
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    private Set<ProcessSteps> steps = new HashSet<>();
     private JobModel jobModel;
     private TypeContract typeContract;
     private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
+    private Enterprise enterprise;
+
+    @OneToMany(mappedBy = "jobs")
+    private Set<User> candidates = new HashSet<>();
 
     public Job() {}
 
@@ -92,8 +104,8 @@ public class Job {
         this.additionalInfo = additionalInfo;
     }
 
-    public Set<String> getProcessSteps() {
-        return processSteps;
+    public Set<ProcessSteps> getSteps() {
+        return steps;
     }
 
     public JobModel getJobModel() {
@@ -118,6 +130,14 @@ public class Job {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 
     @Override

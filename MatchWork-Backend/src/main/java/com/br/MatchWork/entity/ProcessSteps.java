@@ -1,48 +1,37 @@
 package com.br.MatchWork.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_ENTERPRISE")
-public class Enterprise {
+@Table(name = "TB_PROCESS_STEPS")
+public class ProcessSteps {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Integer number;
     private String name;
     private String description;
-    private String location;
-    private String cnpj;
-    private String poBox;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
-    private Set<Job> jobs = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Login login;
+    public ProcessSteps () {}
 
-    public Enterprise() {}
-
-    public Enterprise(String name, String description, String location, String cnpj, String poBox, Login login) {
+    public ProcessSteps(Integer number, String name, String description) {
+        this.number = number;
         this.name = name;
         this.description = description;
-        this.location = location;
-        this.cnpj = cnpj;
-        this.poBox = poBox;
-        this.login = login;
     }
 
     public Long getId() {
@@ -51,6 +40,14 @@ public class Enterprise {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -69,42 +66,14 @@ public class Enterprise {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public Job getJob() {
+        return job;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setJob(Job job) {
+        this.job = job;
     }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getPoBox() {
-        return poBox;
-    }
-
-    public void setPoBox(String poBox) {
-        this.poBox = poBox;
-    }
-
-    public Set<Job> getJobs() {
-        return jobs;
-    }
-
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -121,7 +90,7 @@ public class Enterprise {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Enterprise other = (Enterprise) obj;
+        ProcessSteps other = (ProcessSteps) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

@@ -4,10 +4,11 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,6 @@ import com.br.MatchWork.entity.dtos.EnterpriseRequestDto;
 import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 import com.br.MatchWork.service.EnterpriseService;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/en")
 public class EnterpriseController {
@@ -45,5 +45,17 @@ public class EnterpriseController {
         EnterpriseResponseDto entity = service.createEnterprise(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(dto.name()).toUri();
         return ResponseEntity.created(uri).body(entity);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<EnterpriseResponseDto> update(@PathVariable Long id, @RequestBody EnterpriseRequestDto dto) {
+        EnterpriseResponseDto entity = service.update(id, dto);
+        return ResponseEntity.ok(entity);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<EnterpriseResponseDto> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

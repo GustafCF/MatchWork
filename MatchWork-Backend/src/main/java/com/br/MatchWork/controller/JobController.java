@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import com.br.MatchWork.entity.dtos.JobRequestDto;
 import com.br.MatchWork.entity.dtos.JobResponseDto;
 import com.br.MatchWork.service.JobServiceImpl;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/job")
 public class JobController {
@@ -42,9 +40,9 @@ public class JobController {
         return ResponseEntity.ok(job);
     }
 
-    @PostMapping("/insert")
-    public ResponseEntity<JobResponseDto> insert(@RequestBody JobRequestDto dto) {
-        JobResponseDto job = service.createJob(dto);
+    @PostMapping("/insert/{name}")
+    public ResponseEntity<JobResponseDto> insert(@PathVariable String name, @RequestBody JobRequestDto dto) {
+        JobResponseDto job = service.createJob(name, dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(job.name()).toUri();
         return ResponseEntity.created(uri).body(job);
     }

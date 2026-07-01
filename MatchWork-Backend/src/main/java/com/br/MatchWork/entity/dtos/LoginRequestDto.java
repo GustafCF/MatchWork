@@ -2,14 +2,11 @@ package com.br.MatchWork.entity.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record UserRequestDto(
-    String name,
-    Integer age,
-    String addres,
-    String cpf,
+public record LoginRequestDto(
     @NotBlank
     String email,
     @NotBlank
     String password
-) 
-{}
+) {
+
+}

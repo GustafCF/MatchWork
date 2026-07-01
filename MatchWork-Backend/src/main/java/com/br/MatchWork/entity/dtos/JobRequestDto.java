@@ -12,7 +12,6 @@ public record JobRequestDto(
     String requirements,
     String additionalInfo,
     JobModel jobModel,
-    TypeContract typeContract,
-    LocalDate date
+    TypeContract typeContract
 ) 
 {}

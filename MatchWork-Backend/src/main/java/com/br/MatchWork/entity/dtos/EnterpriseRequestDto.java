@@ -5,5 +5,7 @@ public record EnterpriseRequestDto(
     String description,
     String location,
     String cnpj,
-    String poBox
+    String poBox,
+    String email,
+    String password
 ) {}
