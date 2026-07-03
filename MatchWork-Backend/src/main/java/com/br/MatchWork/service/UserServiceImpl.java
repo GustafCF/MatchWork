@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponseDto createUser(UserRequestDto dto) {
+        Role role = roleRepo.findByName("ENTERPRISE").orElseThrow(()-> new ResourceNotFoundException("ENTERPRISE"));
         User user = mapper.toEntity(dto);
-        Role rl = roleRepo.findById(1L).orElseThrow(()-> new ResourceNotFoundException("1L"));
-        user.getLogin().getRoles().add(rl);
+        user.getLogin().getRoles().add(role);
         User userSave = userRepo.save(user);
         return mapper.toResponseDto(userSave);
     }

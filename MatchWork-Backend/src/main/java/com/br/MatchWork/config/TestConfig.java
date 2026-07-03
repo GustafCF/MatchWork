@@ -30,14 +30,15 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Role r1 = new Role("Base", "Base");
+        Role r1 = new Role("BASIC", "Permissões para Usuários Básicos");
+        Role r2 = new Role("ENTERPRISE", "Permissões específicas para Empresas");
         
         User u1 = new User("Verônica", 18, "Brasilia/DF", "1234567", new Login("veve@email.com", encode.encode("12345678")));
-        // u1.getLogin().getRoles().add(r1);
+        u1.getLogin().getRoles().add(r1);
         userRepo.save(u1);
 
         Enterprise e1 = new Enterprise("AD-CONTRACT", "Empresa de Tecnologia","Goiânia/GO", "1212121212", "AD AVENIDA 4", new Login("ad@email.com", encode.encode("12345678")));
-        e1.getLogin().getRoles().add(r1);
+        e1.getLogin().getRoles().add(r2);
         enterpriseRepo.save(e1);
 
     }

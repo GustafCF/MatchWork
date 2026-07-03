@@ -6,20 +6,24 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.br.MatchWork.entity.Enterprise;
+import com.br.MatchWork.entity.Role;
 import com.br.MatchWork.entity.dtos.EnterpriseRequestDto;
 import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 import com.br.MatchWork.entity.mapper.EnterpriseMapper;
 import com.br.MatchWork.exceptions.ResourceNotFoundException;
 import com.br.MatchWork.repository.EnterpriseRepository;
+import com.br.MatchWork.repository.RoleRepository;
 
 @Service
 public class EnterpriseServiceImpl implements EnterpriseService {
 
     private final EnterpriseRepository repository;
+    private final RoleRepository roleRepo;
     private final EnterpriseMapper mapper;
 
-    public EnterpriseServiceImpl(EnterpriseRepository repository, EnterpriseMapper mapper) {
+    public EnterpriseServiceImpl(EnterpriseRepository repository, RoleRepository roleRepo, EnterpriseMapper mapper) {
         this.repository = repository;
+        this.roleRepo = roleRepo;
         this.mapper = mapper;
     }
 
@@ -38,7 +42,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     public EnterpriseResponseDto createEnterprise(EnterpriseRequestDto dto) {
+        Role role = roleRepo.findByName("ENTERPRISE").orElseThrow(()-> new ResourceNotFoundException("ENTERPRISE"));
         Enterprise entity = mapper.toEntity(dto);
+        entity.getLogin().getRoles().add(role);
         Enterprise savedEntity = repository.save(entity);
         return mapper.toResponse(savedEntity);
     }

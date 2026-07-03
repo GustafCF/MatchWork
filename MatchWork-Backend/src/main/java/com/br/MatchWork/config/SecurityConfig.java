@@ -45,7 +45,8 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/lg/login", "/us/insert", "/job/insert/AD-CONTRACT").permitAll()
+                .requestMatchers(HttpMethod.POST, "/lg/login", "/us/insert", "/en/insert").permitAll()
+                .requestMatchers(HttpMethod.GET, "/findAll", "/find/{id}").permitAll()
             )
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))

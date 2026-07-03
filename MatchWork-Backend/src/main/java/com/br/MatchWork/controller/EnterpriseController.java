@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +30,14 @@ public class EnterpriseController {
     }
 
     @GetMapping("/findAll")
+    @PreAuthorize("hasRole('ENTERPRISE')")
     public ResponseEntity<List<EnterpriseResponseDto>> findAll() {
         List<EnterpriseResponseDto> entities = service.findAll();
         return ResponseEntity.ok(entities);
     }
 
     @GetMapping("/find/{id}")
+    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwner(#id)")
     public ResponseEntity<EnterpriseResponseDto> findById(@PathVariable Long id) {
         EnterpriseResponseDto entity = service.findById(id);
         return ResponseEntity.ok(entity);
@@ -48,12 +51,14 @@ public class EnterpriseController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwner(#id)")
     public ResponseEntity<EnterpriseResponseDto> update(@PathVariable Long id, @RequestBody EnterpriseRequestDto dto) {
         EnterpriseResponseDto entity = service.update(id, dto);
         return ResponseEntity.ok(entity);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ENTERPRISE') or @securityService.isOwner(#id)")
     public ResponseEntity<EnterpriseResponseDto> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
