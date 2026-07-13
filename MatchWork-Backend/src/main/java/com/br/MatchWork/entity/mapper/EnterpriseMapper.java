@@ -34,7 +34,8 @@ public class EnterpriseMapper {
             enterprise.getDescription(),
             enterprise.getLocation(),
             enterprise.getCnpj(),
-            enterprise.getPoBox()
+            enterprise.getPoBox(),
+            enterprise.getLogin().getEmail()
         );
     }
 

@@ -19,6 +19,8 @@ import com.br.MatchWork.entity.dtos.EnterpriseRequestDto;
 import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 import com.br.MatchWork.service.EnterpriseService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/en")
 public class EnterpriseController {
@@ -37,28 +39,28 @@ public class EnterpriseController {
     }
 
     @GetMapping("/find/{id}")
-    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwner(#id)")
+    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwnerEnterprise(#id)")
     public ResponseEntity<EnterpriseResponseDto> findById(@PathVariable Long id) {
         EnterpriseResponseDto entity = service.findById(id);
         return ResponseEntity.ok(entity);
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<EnterpriseResponseDto> insert(@RequestBody EnterpriseRequestDto dto) {
+    public ResponseEntity<EnterpriseResponseDto> insert(@Valid @RequestBody EnterpriseRequestDto dto) {
         EnterpriseResponseDto entity = service.createEnterprise(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(dto.name()).toUri();
         return ResponseEntity.created(uri).body(entity);
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwner(#id)")
+    @PreAuthorize("hasRole('ENTERPRISE') and @securityService.isOwnerEnterprise(#id)")
     public ResponseEntity<EnterpriseResponseDto> update(@PathVariable Long id, @RequestBody EnterpriseRequestDto dto) {
         EnterpriseResponseDto entity = service.update(id, dto);
         return ResponseEntity.ok(entity);
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ENTERPRISE') or @securityService.isOwner(#id)")
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ENTERPRISE') or @securityService.isOwnerEnterprise(#id)")
     public ResponseEntity<EnterpriseResponseDto> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

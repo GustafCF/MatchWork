@@ -26,8 +26,8 @@ public class RsaKeyGenerator {
     private final RSAPrivateKey privatekey;
 
     public RsaKeyGenerator() {
-        File publickeyFile = new File("PUBLIC_KEY_FILE");
-        File privatekeyFile = new File("PRIVATE_KEY_FILE");
+        File publickeyFile = new File(PUBLIC_KEY_FILE);
+        File privatekeyFile = new File(PRIVATE_KEY_FILE);
 
         if (publickeyFile.exists() && privatekeyFile.exists()) {
             this.publickey = loadPublicKey(publickeyFile);

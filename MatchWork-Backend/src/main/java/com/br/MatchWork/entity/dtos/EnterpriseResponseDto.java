@@ -5,5 +5,6 @@ public record EnterpriseResponseDto (
     String description,
     String location,
     String cnpj,
-    String poBox
+    String poBox,
+    String email
 ) {}

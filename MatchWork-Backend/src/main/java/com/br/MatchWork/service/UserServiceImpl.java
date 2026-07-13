@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.br.MatchWork.entity.Curriculum;
 import com.br.MatchWork.entity.Role;
 import com.br.MatchWork.entity.User;
+import com.br.MatchWork.entity.dtos.CurriculumRequestDto;
+import com.br.MatchWork.entity.dtos.CurriculumResponseDto;
 import com.br.MatchWork.entity.dtos.UserRequestDto;
 import com.br.MatchWork.entity.dtos.UserResponseDto;
 import com.br.MatchWork.entity.mapper.UserMapper;
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponseDto createUser(UserRequestDto dto) {
-        Role role = roleRepo.findByName("ENTERPRISE").orElseThrow(()-> new ResourceNotFoundException("ENTERPRISE"));
+        Role role = roleRepo.findByName("BASIC").orElseThrow(()-> new ResourceNotFoundException("BASIC"));
         User user = mapper.toEntity(dto);
         user.getLogin().getRoles().add(role);
         User userSave = userRepo.save(user);

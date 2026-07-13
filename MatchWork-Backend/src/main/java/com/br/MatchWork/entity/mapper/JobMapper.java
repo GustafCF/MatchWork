@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import com.br.MatchWork.entity.Job;
+import com.br.MatchWork.entity.dtos.JobAllResponseDto;
 import com.br.MatchWork.entity.dtos.JobRequestDto;
 import com.br.MatchWork.entity.dtos.JobResponseDto;
 
@@ -35,6 +36,21 @@ public class JobMapper {
             job.getJobModel(),
             job.getTypeContract(),
             job.getDate()
+        );
+    }
+
+    public JobAllResponseDto toJobAllResponse(Job job) {
+        return new JobAllResponseDto(
+            job.getName(),
+            job.getDescription(),
+            job.getResponsibility(),
+            job.getRequirements(),
+            job.getAdditionalInfo(),
+            job.getSteps(),
+            job.getJobModel(),
+            job.getTypeContract(),
+            job.getDate(),
+            job.getCandidates()
         );
     }
 

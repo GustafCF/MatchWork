@@ -2,7 +2,7 @@ spring:
   application:
     name: MatchWork
   profiles:
-    active: test
+    active: dev
   datasource: 
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver

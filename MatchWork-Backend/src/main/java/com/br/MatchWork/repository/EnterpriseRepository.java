@@ -10,5 +10,5 @@ import com.br.MatchWork.entity.Enterprise;
 @Repository
 public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 
-    Optional<Enterprise> findByName(String name);
+    Optional<Enterprise> findByLogin_Email(String email);
 }

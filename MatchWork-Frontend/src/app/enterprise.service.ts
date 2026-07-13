@@ -23,5 +23,4 @@ export class EnterpriseService {
   insert(enterprise: EnterpriseRequestDto): Observable<EnterpriseResponseDto> {
     return this.http.post<EnterpriseResponseDto>(`${this.apiUrl}/insert`, enterprise);
   }
-  
 }

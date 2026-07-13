@@ -29,7 +29,7 @@ public class Job {
     private String responsibility;
     private String Requirements;
     private String additionalInfo;
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ProcessSteps> steps = new HashSet<>();
     private JobModel jobModel;
     private TypeContract typeContract;
@@ -138,6 +138,10 @@ public class Job {
 
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
+    }
+
+    public Set<User> getCandidates() {
+        return candidates;
     }
 
     @Override

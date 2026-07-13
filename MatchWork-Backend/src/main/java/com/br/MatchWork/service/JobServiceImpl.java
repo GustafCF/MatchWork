@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.br.MatchWork.entity.Enterprise;
 import com.br.MatchWork.entity.Job;
 import com.br.MatchWork.entity.ProcessSteps;
+import com.br.MatchWork.entity.User;
+import com.br.MatchWork.entity.dtos.JobAllResponseDto;
 import com.br.MatchWork.entity.dtos.JobRequestDto;
 import com.br.MatchWork.entity.dtos.JobResponseDto;
 import com.br.MatchWork.entity.dtos.StepRequestDto;
@@ -15,24 +17,27 @@ import com.br.MatchWork.entity.mapper.JobMapper;
 import com.br.MatchWork.exceptions.ResourceNotFoundException;
 import com.br.MatchWork.repository.EnterpriseRepository;
 import com.br.MatchWork.repository.JobRepository;
+import com.br.MatchWork.repository.UserRepository;
 
 @Service
 public class JobServiceImpl implements JobService {
 
     private final JobRepository jobRepo;
+    private final UserRepository userRepo;
     private final EnterpriseRepository enterpriseRepo;
     private final JobMapper mapper;
 
-    public JobServiceImpl(JobRepository jobRepo, EnterpriseRepository enterpriseRepo, JobMapper mapper) {
+    public JobServiceImpl(JobRepository jobRepo, UserRepository userRepo, EnterpriseRepository enterpriseRepo, JobMapper mapper) {
         this.jobRepo = jobRepo;
+        this.userRepo = userRepo;
         this.enterpriseRepo = enterpriseRepo;
         this.mapper = mapper;
     }
 
     @Override
-    public List<JobResponseDto> findAll() {
+    public List<JobAllResponseDto> findAll() {
         return jobRepo.findAll().stream()
-            .map(mapper::toResponseDto)
+            .map(mapper::toJobAllResponse)
             .collect(Collectors.toList());
     }
 
@@ -43,8 +48,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobResponseDto createJob(String name, JobRequestDto dto) {
-        Enterprise enterprise = enterpriseRepo.findByName(name).orElseThrow(() -> new ResourceNotFoundException(name));
+    public JobResponseDto createJob(String email, JobRequestDto dto) {
+        Enterprise enterprise = enterpriseRepo.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
         Job job = mapper.toEntity(dto);
         job.setEnterprise(enterprise);
         Job savedJob = jobRepo.save(job);
@@ -70,5 +75,15 @@ public class JobServiceImpl implements JobService {
         job.getSteps().add(new ProcessSteps(dto.number(), dto.name(), dto.description()));
         Job savedJob = jobRepo.save(job);
         return mapper.toResponseDto(savedJob);
+    }
+
+    @Override
+    public JobResponseDto candidacies(Long id, String email) {
+        Job job = jobRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        User user = userRepo.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
+        user.setJobs(job);
+        // job.getCandidates().add(user);
+        userRepo.save(user);
+        return mapper.toResponseDto(job);
     }
 }

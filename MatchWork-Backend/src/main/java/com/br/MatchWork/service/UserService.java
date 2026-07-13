@@ -12,5 +12,4 @@ public interface UserService {
     List<UserResponseDto> findAll();
     UserResponseDto update(Long id, UserRequestDto dto);
     void delete(Long id);
-
 }

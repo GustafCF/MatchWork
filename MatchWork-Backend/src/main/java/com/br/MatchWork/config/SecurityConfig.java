@@ -3,8 +3,10 @@ package com.br.MatchWork.config;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -45,8 +47,8 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/lg/login", "/us/insert", "/en/insert").permitAll()
-                .requestMatchers(HttpMethod.GET, "/findAll", "/find/{id}").permitAll()
+                .requestMatchers(HttpMethod.POST, "/lg/login", "/us/insert", "/en/insert", "/job/candidate/{id}/{email}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/job/findAll", "/job/find/{id}").permitAll()
             )
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
@@ -62,7 +64,6 @@ public class SecurityConfig {
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
@@ -73,7 +74,6 @@ public class SecurityConfig {
         JWK jwk = new RSAKey.Builder(publicKey).privateKey(privateKey).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
-
     }
 
     @Bean
@@ -85,5 +85,4 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

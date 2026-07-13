@@ -32,7 +32,9 @@ export class CadastroComponent {
     description: '',
     location: '',
     cnpj: '',
-    poBox: ''
+    poBox: '',
+    email: '',
+    password: ''
   };
 
   constructor(
@@ -93,7 +95,9 @@ export class CadastroComponent {
       description: '',
       location: '',
       cnpj: '',
-      poBox: ''
+      poBox: '',
+      email: '',
+      password: ''
     };
     this.cdr.detectChanges();
   }

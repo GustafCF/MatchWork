@@ -4,6 +4,8 @@ export interface EnterpriseRequestDto {
     location: string;
     cnpj: string;
     poBox: string;
+    email: string;
+    password: string;
 }
 
 export interface EnterpriseResponseDto {

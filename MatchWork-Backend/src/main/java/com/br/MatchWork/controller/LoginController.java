@@ -10,6 +10,8 @@ import com.br.MatchWork.entity.dtos.LoginRequestDto;
 import com.br.MatchWork.entity.dtos.LoginResponseDto;
 import com.br.MatchWork.service.LoginServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/lg")
 public class LoginController {
@@ -21,7 +23,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto dto) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto dto) {
         var response = service.login(dto);
         return ResponseEntity.ok(response);
     }

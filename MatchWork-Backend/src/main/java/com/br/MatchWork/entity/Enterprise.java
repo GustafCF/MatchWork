@@ -26,13 +26,12 @@ public class Enterprise {
     private String location;
     private String cnpj;
     private String poBox;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
-    private Set<Job> jobs = new HashSet<>();
-
     @OneToOne(cascade = CascadeType.ALL)
     private Login login;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Job> jobs = new HashSet<>();
 
     public Enterprise() {}
 

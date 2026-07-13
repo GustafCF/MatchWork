@@ -1,15 +1,24 @@
 package com.br.MatchWork.entity.dtos;
 
+import java.time.LocalDate;
+import java.util.Set;
+
+import com.br.MatchWork.entity.ProcessSteps;
+import com.br.MatchWork.entity.User;
 import com.br.MatchWork.entity.enums.JobModel;
 import com.br.MatchWork.entity.enums.TypeContract;
 
-public record JobRequestDto(
+public record JobAllResponseDto(
     String name,
     String description,
     String responsibility,
     String requirements,
     String additionalInfo,
+    Set<ProcessSteps> steps,
     JobModel jobModel,
-    TypeContract typeContract
-) 
-{}
+    TypeContract typeContract,
+    LocalDate date,
+    Set<User> candidates
+) {
+
+}

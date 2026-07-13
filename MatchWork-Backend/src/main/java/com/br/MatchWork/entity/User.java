@@ -27,6 +27,8 @@ public class User {
     private String cpf;
     @OneToOne(cascade = CascadeType.ALL)
     private Login login;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Curriculum curriculum;
 
     @JsonIgnore
     @ManyToOne
@@ -97,6 +99,14 @@ public class User {
 
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    public Curriculum getCurriculum() {
+        return curriculum;
+    }
+
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
     }
 
     @Override

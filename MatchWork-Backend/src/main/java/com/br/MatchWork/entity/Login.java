@@ -9,6 +9,7 @@ import com.br.MatchWork.entity.dtos.LoginRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     @Size(min = 4, max = 100, message = "The email must be between 4 and 100 characters long!")
     private String email;
     @Size(min = 8, max = 100, message = "The password must be between 8 and 100 characters long!")
