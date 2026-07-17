@@ -14,4 +14,5 @@ export interface EnterpriseResponseDto {
     location: string;
     cnpj: string;
     poBox: string;
+    email: string;
 }

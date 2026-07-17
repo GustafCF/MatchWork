@@ -8,6 +8,7 @@ import com.br.MatchWork.entity.enums.JobModel;
 import com.br.MatchWork.entity.enums.TypeContract;
 
 public record JobResponseDto(
+    Long id,
     String name,
     String description,
     String responsibility,

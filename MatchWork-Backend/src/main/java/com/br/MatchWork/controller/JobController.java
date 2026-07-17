@@ -3,6 +3,7 @@ package com.br.MatchWork.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,8 +33,15 @@ public class JobController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<JobAllResponseDto>> findAll() {
-        List<JobAllResponseDto> jobs = service.findAll();
+    public ResponseEntity<Page<JobAllResponseDto>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction) {
+        
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<JobAllResponseDto> jobs = service.findAll(pageable);
         return ResponseEntity.ok(jobs);
     }
 
@@ -42,10 +51,10 @@ public class JobController {
         return ResponseEntity.ok(job);
     }
 
-    @PostMapping("/insert/{name}")
+    @PostMapping("/insert/{email}")
     @PreAuthorize("hasRole('ENTERPRISE')")
-    public ResponseEntity<JobResponseDto> insert(@PathVariable String name, @RequestBody JobRequestDto dto) {
-        JobResponseDto job = service.createJob(name, dto);
+    public ResponseEntity<JobResponseDto> insert(@PathVariable String email, @RequestBody JobRequestDto dto) {
+        JobResponseDto job = service.createJob(email, dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(job.name()).toUri();
         return ResponseEntity.created(uri).body(job);
     }

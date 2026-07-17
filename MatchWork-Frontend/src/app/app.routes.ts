@@ -11,8 +11,16 @@ export const routes: Routes = [
                 loadComponent: () => import('./landingpage/landingpage.component').then(m => m.LandingpageComponent)
             },
             {
+                path: 'login',
+                loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
+            },
+            {
                 path: 'cadastro',
                 loadComponent: () => import('./cadastro/cadastro.component').then(m => m.CadastroComponent)
+            },
+            {
+                path: 'jobs',
+                loadComponent: () => import('./jobs/jobs.component').then(m => m.JobsComponent)
             }
         ]
     }

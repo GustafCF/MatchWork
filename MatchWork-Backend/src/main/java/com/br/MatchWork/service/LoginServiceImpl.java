@@ -24,7 +24,7 @@ public class LoginServiceImpl implements LoginService {
     private final JwtEncoder jwtEncoder;
     private final BCryptPasswordEncoder encode;
 
-    public LoginServiceImpl(LoginRepository repository,JwtEncoder jwtEncoder, BCryptPasswordEncoder encode) {
+    public LoginServiceImpl(LoginRepository repository, JwtEncoder jwtEncoder, BCryptPasswordEncoder encode) {
         this.repository = repository;
         this.jwtEncoder = jwtEncoder;
         this.encode = encode;
@@ -54,6 +54,6 @@ public class LoginServiceImpl implements LoginService {
             .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-        return new LoginResponseDto(jwtValue, expiresIn);
+        return new LoginResponseDto(entity.getEmail(), jwtValue, expiresIn);
     }
 }

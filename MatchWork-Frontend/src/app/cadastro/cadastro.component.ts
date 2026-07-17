@@ -24,7 +24,8 @@ export class CadastroComponent {
     age: 0,
     addres: '',
     cpf: '',
-    email: ''
+    email: '',
+    password: ''
   };
 
   enterprise: EnterpriseRequestDto = {
@@ -66,6 +67,7 @@ export class CadastroComponent {
       next: (response) => {
         console.log("Usuário salvo com sucesso!", response);
         alert('Usuário cadastrado com sucesso!');
+        localStorage.setItem("emailUser", response.email);
         this.clearUserForm();
       },
       error: (erro) => {
@@ -108,7 +110,8 @@ export class CadastroComponent {
       age: 0,
       addres: '',
       cpf: '',
-      email: ''
+      email: '',
+      password: ''
     };
     this.cdr.detectChanges();
   }

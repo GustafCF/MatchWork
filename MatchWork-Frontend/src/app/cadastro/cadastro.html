@@ -61,7 +61,7 @@
                             placeholder="EX: 123.445.213.77" mask="000.000.000-00">
                     </div>
                 </div>
-                <div class="form-row-full">
+                <div class="form-row">
                     <div class="campo">
                         <label for="email">Email</label>
                         <input 
@@ -69,7 +69,20 @@
                             id="email" 
                             name="email"
                             [(ngModel)]="user.email" 
-                            placeholder="Ex: may@email.com">
+                            placeholder="Ex: may@email.com"
+                            required   
+                        >    
+                    </div>
+                    <div class="campo">
+                        <label for="password">Senha</label>
+                        <input 
+                            type="password"
+                            id="password"
+                            name="password"
+                            [(ngModel)]="user.password"
+                            placeholder="min: 8 caracteres"
+                            required
+                        >
                     </div>
                 </div>
             </div>
@@ -128,6 +141,30 @@
                             id="poBox"
                             [(ngModel)]="enterprise.poBox" 
                             placeholder="Ex: Rua 375 Dott hun">
+                    </div>
+                    <div class="campo">
+                        <label for="email_e">Email</label>
+                        <input 
+                            type="email"
+                            id="email_e"
+                            name="email_e"
+                            [(ngModel)]="enterprise.email"
+                            placeholder="ex: ad-scs@emal.com"
+                            required
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="campo">
+                        <label for="password_e">Senha</label>
+                        <input 
+                            type="password"
+                            id="password_e"
+                            name="password_e"
+                            [(ngModel)]="enterprise.password"
+                            placeholder="min: 8 caracteres"
+                            required
+                        >
                     </div>
                 </div>
             </div>

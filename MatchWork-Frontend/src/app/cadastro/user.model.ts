@@ -4,6 +4,7 @@ export interface UserRequestDto {
     addres: string;
     cpf: string;
     email: string;
+    password: string;
 }
 
 export interface UserResponseDto {
@@ -12,4 +13,11 @@ export interface UserResponseDto {
     addres: string;
     cpf: string;
     email: string;
+    curriculum: Curriculum;
+}
+
+export interface Curriculum {
+    education: string[];
+    experiencie: string[];
+    skills: string[];
 }

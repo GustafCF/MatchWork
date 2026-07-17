@@ -1,6 +1,7 @@
 package com.br.MatchWork.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.br.MatchWork.entity.dtos.JobAllResponseDto;
 import com.br.MatchWork.entity.dtos.JobRequestDto;
@@ -9,7 +10,7 @@ import com.br.MatchWork.entity.dtos.StepRequestDto;
 
 public interface JobService {
 
-    List<JobAllResponseDto> findAll();
+    Page<JobAllResponseDto> findAll(Pageable pageable);
     JobResponseDto findById(Long id);
     JobResponseDto createJob(String email, JobRequestDto dto);
     JobResponseDto update(Long id, JobRequestDto dto);

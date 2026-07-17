@@ -1,8 +1,7 @@
 package com.br.MatchWork.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.br.MatchWork.entity.Enterprise;
@@ -35,10 +34,9 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<JobAllResponseDto> findAll() {
-        return jobRepo.findAll().stream()
-            .map(mapper::toJobAllResponse)
-            .collect(Collectors.toList());
+    public Page<JobAllResponseDto> findAll(Pageable pageable) {
+        Page<Job> page = jobRepo.findAll(pageable);
+        return page.map(mapper::toJobAllResponse);
     }
 
     @Override

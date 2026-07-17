@@ -27,6 +27,7 @@ public class JobMapper {
 
     public JobResponseDto toResponseDto(Job job) {
         return new JobResponseDto(
+            job.getId(),
             job.getName(),
             job.getDescription(),
             job.getResponsibility(),
@@ -41,6 +42,7 @@ public class JobMapper {
 
     public JobAllResponseDto toJobAllResponse(Job job) {
         return new JobAllResponseDto(
+            job.getId(),
             job.getName(),
             job.getDescription(),
             job.getResponsibility(),

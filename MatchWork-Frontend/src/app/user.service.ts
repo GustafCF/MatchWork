@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserRequestDto, UserResponseDto } from './cadastro/user.model';
@@ -11,12 +11,19 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  private getAuthHeader(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}` 
+    });
+  }
+
   findAll(): Observable<UserResponseDto[]> {
-    return this.http.get<UserResponseDto[]>(`${this.apiUrl}/findAll`);
+    return this.http.get<UserResponseDto[]>(`${this.apiUrl}/findAll`, {headers: this.getAuthHeader()});
   }
 
   findById(id: number): Observable<UserResponseDto> {
-    return this.http.get<UserResponseDto>(`${this.apiUrl}/find/${id}`);
+    return this.http.get<UserResponseDto>(`${this.apiUrl}/find/${id}`, {headers: this.getAuthHeader()});
   }
 
   insert(user: UserRequestDto): Observable<UserResponseDto> {
@@ -24,10 +31,10 @@ export class UserService {
   }
 
   update(id: number, user: UserRequestDto): Observable<UserResponseDto> {
-    return this.http.put<UserResponseDto>(`${this.apiUrl}/update/${id}`, user);
+    return this.http.put<UserResponseDto>(`${this.apiUrl}/update/${id}`, user, {headers: this.getAuthHeader()});
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {headers: this.getAuthHeader()});
   }
 }
