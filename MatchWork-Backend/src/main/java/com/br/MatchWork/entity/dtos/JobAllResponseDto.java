@@ -3,6 +3,7 @@ package com.br.MatchWork.entity.dtos;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.br.MatchWork.entity.Enterprise;
 import com.br.MatchWork.entity.ProcessSteps;
 import com.br.MatchWork.entity.User;
 import com.br.MatchWork.entity.enums.JobModel;
@@ -19,6 +20,7 @@ public record JobAllResponseDto(
     JobModel jobModel,
     TypeContract typeContract,
     LocalDate date,
+    Enterprise enterprise,
     Set<User> candidates
 ) {
 

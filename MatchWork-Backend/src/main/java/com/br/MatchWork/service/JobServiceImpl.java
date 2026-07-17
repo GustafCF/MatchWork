@@ -46,6 +46,13 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public Page<JobAllResponseDto> findByName(String name, Pageable pageable) {
+        String normalized = name.trim().replaceAll("\\s+", " ");
+        Page<Job> page = jobRepo.findByNameContainingIgnoreCase(normalized, pageable);
+        return page.map(mapper::toJobAllResponse);
+    }
+
+    @Override
     public JobResponseDto createJob(String email, JobRequestDto dto) {
         Enterprise enterprise = enterpriseRepo.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
         Job job = mapper.toEntity(dto);

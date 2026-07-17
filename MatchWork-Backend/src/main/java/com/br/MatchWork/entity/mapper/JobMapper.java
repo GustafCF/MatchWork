@@ -36,6 +36,7 @@ public class JobMapper {
             job.getSteps(),
             job.getJobModel(),
             job.getTypeContract(),
+            job.getEnterprise(),
             job.getDate()
         );
     }
@@ -52,6 +53,7 @@ public class JobMapper {
             job.getJobModel(),
             job.getTypeContract(),
             job.getDate(),
+            job.getEnterprise(),
             job.getCandidates()
         );
     }

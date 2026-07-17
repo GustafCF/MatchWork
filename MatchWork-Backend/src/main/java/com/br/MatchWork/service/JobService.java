@@ -12,6 +12,7 @@ public interface JobService {
 
     Page<JobAllResponseDto> findAll(Pageable pageable);
     JobResponseDto findById(Long id);
+    Page<JobAllResponseDto> findByName(String name, Pageable pageable);
     JobResponseDto createJob(String email, JobRequestDto dto);
     JobResponseDto update(Long id, JobRequestDto dto);
     void delete(Long id);

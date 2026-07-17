@@ -8,14 +8,15 @@
         <h1>Todas as vagas de </h1>
         <p>Número de vagas</p>
     </div>
-    <div class="sub-container">
-        <img src="/public/favicon.ico" alt="">
-        <p>Nome da empresa</p>
-        <h2>Título da vaga</h2>
-        <p>local</p>
-        <p>modelo de Trabalho</p>
-        <p>Typo de contrato</p>
-        <p>Data da postagem</p>
-    </div>
+    @for (job of jobs; track loadJobs()) {
+        <div class="sub-container">
+            <img src="/public/favicon.ico" alt="">
+            <h2>{{ job.name }}</h2>
+            <p>{{ job.description }}</p>
+            <p>{{ job.jobModel }}</p>
+            <p>{{ job.typeContract }}</p>
+            <p>{{ job.date }}</p>
+        </div>
+    }
 </div>
 

@@ -49,7 +49,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/lg/login", "/us/insert", "/en/insert", "/job/candidate/{id}/{email}").permitAll()
-                .requestMatchers(HttpMethod.GET, "/job/findAll", "/job/find/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/job/findAll", "/job/find/{id}", "/job/search").permitAll()
             )
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))

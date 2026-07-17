@@ -31,6 +31,6 @@
 }
 
 .search input:focus {
-    outline: 1px solid #0a6dcf;
+    outline: 1px solid #4fc3f7;
     border-color: #4fc3f7;
 }
