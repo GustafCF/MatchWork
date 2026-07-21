@@ -43,18 +43,20 @@ img {
 }
 
 a {
+  width: 145px;
   border: none;
   border-radius: 12px;
-  padding: 12px 24px;
+  padding: 8px 20px;
   text-decoration: none;
   color: white;
-  background-color: #0a66c2;
+  background-color: #616161;
   font-weight: bold;
+  font-size: small;
   transition: 0.3s;
 }
 
 a:hover {
-  background-color: #084a8f;
+  background-color: #929292;
   transform: scale(1.05);
 }
 
@@ -68,4 +70,32 @@ input {
   border: 2px solid #0a66c2;
   border-radius: 8px;
   height: 35px;
+}
+
+input:focus {
+  outline: 1px solid #0b74dd;
+  border-color: #0b74dd;
+}
+
+.align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  width: 145px;
+  padding: 8px 20px;
+  background-color:#084a8f;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color:#0a66c2;
+  transform: scale(1.05);
 }

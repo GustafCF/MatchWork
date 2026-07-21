@@ -23,14 +23,73 @@
 }
 
 .search input{
-    width: 50%;
     height: 35px;
-    border-radius: 8px;
+    border-radius: 20px;
     border: 3px solid #0a66c2;
     margin-bottom: 25px;
 }
 
 .search input:focus {
-    outline: 1px solid #4fc3f7;
-    border-color: #4fc3f7;
+    outline: 1px solid #29a0d8;
+    border-color: #29a0d8;
+}
+
+.align {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    margin-bottom: 25px;
+    border: none;
+    background-color: #0a66c2;
+    color: white;
+    border-radius: 20px;
+    height: 35px;
+    width: 8%;
+    cursor: pointer;
+}
+
+.conatiner {
+    display: flex;
+}
+
+.title {
+    margin: 15px;
+    font-family: "Montenegrin Gothic One", serif;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 gray;
+    width: 25%;
+    height: 140px;
+    text-align: center;
+    font-family: "Montenegrin Gothic One", serif;
+    gap: 3px;
+}
+
+.mini-block {
+    display: flex;
+    font-size: small;
+    gap: 35px;
+    color: rgb(44, 44, 44);
+}
+
+#enterprise {
+    text-shadow: 3px 3px 3px gray;
+    font-weight: bolder;
+}
+
+#name {
+    border-radius: 8px;
+    width: 80%;
+    color: white;
+    background-color: black;
 }

@@ -21,6 +21,10 @@ export class LoginComponent {
     password: ''
   };
 
+  onSubmit() {
+    this.login();
+  }
+
   login() {
     this.service.login(this.loginRequest).subscribe({
       next: (response) => {
@@ -36,10 +40,6 @@ export class LoginComponent {
         alert("Erro ao fazer login. Tente Novamente!");
       }
     });
-  }
-
-  onSubmit() {
-    this.login();
   }
 
   clearForm() {

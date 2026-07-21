@@ -3,7 +3,10 @@
   <h1 class="titulo">Aqui você vai encontrar seu novo emprego e o seu funcionário ideal!</h1>
   <div class="links">
     <label for="vaga">Procurar vaga:</label>
-    <input type="text" id="vaga" name="vaga" placeholder=" Ex: Desenvolvedor">
-    <a routerLink="/vagas">Explorar todas as vagas</a>
+    <input type="text" id="vaga" name="vaga" placeholder="Ex: Desenvolvedor" #searchInput (keyup.enter)="buscarVaga(searchInput.value)">
+    <div class="align">
+      <button (click)="buscarVaga(searchInput.value)">Buscar</button>
+      <a routerLink="/jobs">Explorar vagas</a>
+    </div>
   </div>
 </div>

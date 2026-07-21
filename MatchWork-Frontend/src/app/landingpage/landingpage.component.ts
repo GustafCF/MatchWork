@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-landingpage',
@@ -8,4 +8,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './landingpage.html',
   styleUrl: './landingpage.css',
 })
-export class LandingpageComponent {}
+export class LandingpageComponent {
+
+  constructor(private router: Router) 
+  {}
+
+  buscarVaga(termo: String) {
+    this.router.navigate(['/jobs'], { queryParams: { search: termo.trim() } });
+  }
+}

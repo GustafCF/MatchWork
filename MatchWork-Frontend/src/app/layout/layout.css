@@ -90,6 +90,7 @@ main {
     font-size: 1.2rem;
     padding: 10px;
     border-bottom: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
 }
 
 .sidebar a:hover {
@@ -121,3 +122,12 @@ main {
     background-color: white;
     color: #0a66c2;
 }
+
+#user-email {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+    color: #0a66c2;
+    cursor: auto;
+}
+

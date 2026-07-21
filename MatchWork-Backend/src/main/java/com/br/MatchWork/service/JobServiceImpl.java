@@ -47,8 +47,14 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Page<JobAllResponseDto> findByName(String name, Pageable pageable) {
+        if(name.isBlank() || name == null) {
+            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio!");
+        }
         String normalized = name.trim().replaceAll("\\s+", " ");
         Page<Job> page = jobRepo.findByNameContainingIgnoreCase(normalized, pageable);
+        if(page.isEmpty()) {
+            throw new ResourceNotFoundException(name);
+        }
         return page.map(mapper::toJobAllResponse);
     }
 
