@@ -1,4 +1,32 @@
 <div class="container">
-    <h2>{{ job.enterprise.name }}</h2>
+    <div class="card">
+        <h1>Vaga: {{ job.name }}</h1>
+        <h2 routerLink="/enterprise">Empresa: {{ job.enterprise.name }}</h2>
+    </div>
+    <div class="card-open">
+        <h3>Descrição:</h3><p>{{job.description }}</p>
+    </div>
+    <div class="card-open">
+        <h3>Responsabilidades:</h3><p>{{ job.responsibility }}</p>
+    </div>
+    <div class="card-open">
+        <h3>Requisitos:</h3><p>{{ job.requirements }}</p>
+    </div>
+    <div class="card-open">
+        <h3>Informações adicionais:</h3><p>{{ job.additionalInfo }}</p>
+    </div>
+    <div class="card-open">
+        <h3>Modelo de Trabalho:</h3><p>{{ job.jobModel }}</p>
+    </div>
+    <div class="card-open">
+        <h3>Tipo de Contrato: </h3><P>{{ job.typeContract }}</P>
+    </div>
+    <div class="card-open">
+        <h3>Data da Vaga:</h3><p>{{ job.date }}</p>
+    </div>
+    <div class="steps">
+        @for(jobs of job.steps; track job.id) {
+            <h3>Etapas:</h3><p>{{ job.steps[0] }}</p>
+        }
+    </div>
 </div>
-

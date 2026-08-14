@@ -6,11 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.br.MatchWork.entity.Curriculum;
 import com.br.MatchWork.entity.Role;
 import com.br.MatchWork.entity.User;
-import com.br.MatchWork.entity.dtos.CurriculumRequestDto;
-import com.br.MatchWork.entity.dtos.CurriculumResponseDto;
 import com.br.MatchWork.entity.dtos.UserRequestDto;
 import com.br.MatchWork.entity.dtos.UserResponseDto;
 import com.br.MatchWork.entity.mapper.UserMapper;
@@ -47,6 +44,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto findById(Long id) {
         User user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        return mapper.toResponseDto(user);
+    }
+
+    @Override
+    public UserResponseDto findByEmail(String email) {
+        User user = userRepo.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
         return mapper.toResponseDto(user);
     }
 

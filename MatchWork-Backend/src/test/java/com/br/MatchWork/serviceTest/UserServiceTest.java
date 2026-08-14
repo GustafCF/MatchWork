@@ -78,7 +78,8 @@ public class UserServiceTest {
             "Rua A, 123",
             "12345678901",
             "joao@email.com",
-            null
+            null,
+            ""
         );
     }
 
@@ -144,7 +145,7 @@ public class UserServiceTest {
     void findAll_Success() {
         User user2 = new User("Maria", 25, "Rua B", "98765432100", new Login("maria@email.com", "senha"));
         user2.setId(2L);
-        UserResponseDto response2 = new UserResponseDto("Maria", 25, "Rua B", "98765432100", "maria@email.com", null);
+        UserResponseDto response2 = new UserResponseDto("Maria", 25, "Rua B", "98765432100", "maria@email.com", null, "");
 
         when(userRepo.findAll()).thenReturn(List.of(user, user2));
         when(mapper.toResponseDto(user)).thenReturn(userResponse);
@@ -190,7 +191,8 @@ public class UserServiceTest {
             "Rua C, 456",
             "11122233344",
             "joao@email.com",
-            null
+            null,
+            ""
         );
 
         when(userRepo.findById(1L)).thenReturn(Optional.of(user));

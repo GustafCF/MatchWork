@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { JobService } from '../job.service';
 import { JobResponse } from '../jobs/job';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-job-open',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './job-open.html',
   styleUrl: './job-open.css',
 })
@@ -19,30 +19,38 @@ export class JobOpenComponent implements OnInit {
     responsibility: '',
     requirements: '',
     additionalInfo: '',
-    ProcessSteps: [],
+    steps: [],
     jobModel: [],
     typeContract: [],
     enterprise: [],
     date: '',
   };
 
-  constructor(private service: JobService, private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private service: JobService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const id = params['jobOpen'];
-      this.loadJobId(id);
+        this.loadJobId(id);
     });
   }
 
   loadJobId(jobId: number) {
-    this.service.findByid(jobId).subscribe({
+    console.log(jobId);
+    this.service.findById(jobId).subscribe({
       next: (response) => {
         this.job = response;
-        console.log(response);
+        console.log("Success: ", response);
+        this.cdr.markForCheck();
       },
       error: (erro) => {
-        console.log("Erro:", erro);
+        console.error("Erro:", erro);
+        alert("Erro ao carregar Vaga!");
+        this.cdr.markForCheck();
       }
     });
   }

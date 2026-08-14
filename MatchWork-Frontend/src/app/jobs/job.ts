@@ -5,7 +5,7 @@ export interface JobResponseAll {
     responsibility: string;
     requirements: string;
     additionalInfo: string;
-    ProcessSteps: any;
+    steps: any;
     jobModel: any;
     typeContract: any;
     date: string;
@@ -20,7 +20,7 @@ export interface JobResponse {
     responsibility: string;
     requirements: string;
     additionalInfo: string;
-    ProcessSteps: any;
+    steps: any;
     jobModel: any;
     typeContract: any;
     enterprise: any;

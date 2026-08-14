@@ -98,6 +98,7 @@ class UserControllerTest {
                 "Rua A, 123",
                 "123.456.789-00",
                 "joao@email.com",
+                null,
                 null 
         );
     }

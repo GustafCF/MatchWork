@@ -8,6 +8,7 @@ public record UserResponseDto (
     String addres,
     String cpf,
     String email,
-    Curriculum curriculum
+    Curriculum curriculum,
+    String role
 ) 
 {}

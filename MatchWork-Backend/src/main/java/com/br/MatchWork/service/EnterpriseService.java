@@ -8,7 +8,8 @@ import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 public interface EnterpriseService {
 
     List<EnterpriseResponseDto> findAll();
-    EnterpriseResponseDto findById(Long id); 
+    EnterpriseResponseDto findByEmail(String email);
+    EnterpriseResponseDto findById(Long id);
     EnterpriseResponseDto createEnterprise(EnterpriseRequestDto dto);
     EnterpriseResponseDto update(Long id, EnterpriseRequestDto dto);
     void delete(Long id); 

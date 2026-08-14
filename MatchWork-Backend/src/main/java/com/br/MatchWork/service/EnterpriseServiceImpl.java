@@ -35,6 +35,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    public EnterpriseResponseDto findByEmail(String email) {
+        Enterprise enterprise =  repository.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
+        return mapper.toResponse(enterprise);
+    }
+
+    @Override
     public EnterpriseResponseDto findById(Long id) {
         Enterprise entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return mapper.toResponse(entity);
@@ -61,4 +67,5 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
 }

@@ -45,6 +45,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/find/{email}")
+    public ResponseEntity<UserResponseDto> findByEmail(@PathVariable String email) {
+        UserResponseDto user = service.findByEmail(email);
+        return ResponseEntity.ok(user);
+    }
+
     @PostMapping("/insert")
     public ResponseEntity<UserResponseDto> insert(@Valid @RequestBody UserRequestDto dto) {
         UserResponseDto user = service.createUser(dto);

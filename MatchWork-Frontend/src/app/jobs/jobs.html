@@ -17,16 +17,22 @@
     <div class="title">
         <h1>{{ searchTerm ? 'Resultados para: ' + searchTerm : 'Todas as vagas' }}</h1>
     </div>
-    @for (job of jobs; track job.id) {
-        <div class="sub-container" (click)="buscarVagaId(job.id)">
-            <p id="enterprise">{{ job.enterprise.name }}</p>
-            <h2 id="name">{{ job.name }}</h2>
-            <p id="description">{{ job.description }}</p>
-            <div class="mini-block">
-                <p id="model">{{ job.jobModel }}</p>
-                <p id="contract">{{ job.typeContract }}</p>
+    @if(loading) {
+        <div class="loading-spinner">Carregando vagas...</div>
+    } @else if (jobs.length === 0) {
+        <div class="no-results">Nenhuma vaga encontrada</div>
+    } @else { 
+        @for (job of jobs; track job.id) {
+            <div class="sub-container" (click)="buscarVagaId(job.id)">
+                <p id="enterprise">{{ job.enterprise.name }}</p>
+                <h2 id="name">{{ job.name }}</h2>
+                <p id="description">{{ job.description }}</p>
+                <div class="mini-block">
+                    <p id="model">{{ job.jobModel }}</p>
+                    <p id="contract">{{ job.typeContract }}</p>
+                </div>
+                <p id="date">{{ job.date }}</p>
             </div>
-            <p id="date">{{ job.date }}</p>
-        </div>
+        }
     }
 </div>

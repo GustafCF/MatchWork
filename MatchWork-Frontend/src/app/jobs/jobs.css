@@ -73,6 +73,7 @@
     text-align: center;
     font-family: "Montenegrin Gothic One", serif;
     gap: 3px;
+    cursor: pointer;
 }
 
 .mini-block {

@@ -75,7 +75,8 @@ public class EnterpriseServiceTest {
             "AV_MARIE",
             "1212121212",
             "CP - 235",
-            "adfood@email.com"
+            "adfood@email.com",
+            ""
         );
     }
 
@@ -85,7 +86,7 @@ public class EnterpriseServiceTest {
         Enterprise e2 = new Enterprise(
             "CHIKEN to", "FOOD E-COMMERCE", "ds 372", "1212121212", "CP - 235",new Login("chiken@email.com", "senha123"));
             e2.setId(2L);
-            EnterpriseResponseDto response2 = new EnterpriseResponseDto("CHIKEN to", "FOOD E-COMMERCE", "ds 372", "1212121212", "CP - 235", "chiken@email.com");
+            EnterpriseResponseDto response2 = new EnterpriseResponseDto("CHIKEN to", "FOOD E-COMMERCE", "ds 372", "1212121212", "CP - 235", "chiken@email.com", "");
             
             when(repository.findAll()).thenReturn(List.of(enterprise, e2));
             when(mapper.toResponse(enterprise)).thenReturn(response);
@@ -138,7 +139,7 @@ public class EnterpriseServiceTest {
     void findAll_Success() {
         Enterprise enterprise2 = new Enterprise("CHIKEN", "FOOD", "DS_RBC", "13-13-131-32", "br_re", new Login("chiken@email.com", "senha123"));
         enterprise2.setId(3L);
-        EnterpriseResponseDto response2 = new EnterpriseResponseDto("CHIKEN", "FOOD", "DS_RBC", "13-13-131-32", "br_re", "chiken@email.com");
+        EnterpriseResponseDto response2 = new EnterpriseResponseDto("CHIKEN", "FOOD", "DS_RBC", "13-13-131-32", "br_re", "chiken@email.com", "");
 
         when(repository.findAll()).thenReturn(List.of(enterprise, enterprise2));
         when(mapper.toResponse(enterprise)).thenReturn(response);
@@ -193,7 +194,8 @@ public class EnterpriseServiceTest {
             "AV_MARIE",
             "1212121245",
             "CP - 235",
-            "adfood@email.com"
+            "adfood@email.com",
+            ""
         );
 
         when(repository.findById(2L)).thenReturn(Optional.of(enterprise));

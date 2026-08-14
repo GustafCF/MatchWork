@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.br.MatchWork.entity.Enterprise;
 import com.br.MatchWork.entity.dtos.EnterpriseRequestDto;
 import com.br.MatchWork.entity.dtos.EnterpriseResponseDto;
 import com.br.MatchWork.service.EnterpriseService;
@@ -43,6 +44,12 @@ public class EnterpriseController {
     public ResponseEntity<EnterpriseResponseDto> findById(@PathVariable Long id) {
         EnterpriseResponseDto entity = service.findById(id);
         return ResponseEntity.ok(entity);
+    }
+
+    @GetMapping("/find/{email}")
+    public ResponseEntity<EnterpriseResponseDto> findByEmail(@PathVariable String email) {
+        EnterpriseResponseDto enterprise = service.findByEmail(email);
+        return ResponseEntity.ok(enterprise);
     }
 
     @PostMapping("/insert")

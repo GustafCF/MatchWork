@@ -8,6 +8,7 @@ import com.br.MatchWork.entity.dtos.UserResponseDto;
 public interface UserService {
 
     UserResponseDto createUser(UserRequestDto dto);
+    UserResponseDto findByEmail(String email);
     UserResponseDto findById(Long id);
     List<UserResponseDto> findAll();
     UserResponseDto update(Long id, UserRequestDto dto);
