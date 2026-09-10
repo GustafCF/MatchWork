@@ -37,12 +37,13 @@ public class User {
 
     public User() {}
 
-    public User(String name, @Min(value = 18, message = "Idade miníma: 18 Anos") Integer age, String addres, String cpf, Login login) {
+    public User(String name, @Min(value = 18, message = "Idade miníma: 18 Anos") Integer age, String addres, String cpf, Login login, Curriculum curriculum) {
         this.name = name;
         this.age = age;
         this.addres = addres;
         this.cpf = cpf;
         this.login = login;
+        this.curriculum = curriculum;
     }
 
     public Long getId() {

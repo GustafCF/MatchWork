@@ -26,4 +26,10 @@ public class CurriculumController {
         CurriculumResponseDto response = service.createCurriculum(email, dto);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/remove/{email}")
+    public ResponseEntity<CurriculumResponseDto> removeInfo(@PathVariable String email, @RequestBody CurriculumRequestDto dto) {
+        CurriculumResponseDto response = service.removeInfo(email, dto);
+        return ResponseEntity.ok(response);
+    }
 }

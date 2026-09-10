@@ -6,5 +6,6 @@ import com.br.MatchWork.entity.dtos.CurriculumResponseDto;
 public interface CurriculumService {
 
     CurriculumResponseDto createCurriculum(String email, CurriculumRequestDto dto);
+    CurriculumResponseDto removeInfo(String email, CurriculumRequestDto dto);
 
 }

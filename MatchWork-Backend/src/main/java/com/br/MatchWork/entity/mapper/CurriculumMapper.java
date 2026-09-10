@@ -17,6 +17,18 @@ public class CurriculumMapper {
         );
     }
 
+    public void remove(Curriculum entity, CurriculumRequestDto dto) {
+        if (!dto.education().isBlank()) {
+            entity.getEducation().remove(dto.education());
+        }
+        if(!dto.experience().isBlank()) {
+            entity.getExperience().remove(dto.experience());
+        }
+        if(!dto.skills().isBlank()) {
+            entity.getSkills().remove(dto.skills());
+        }
+    }
+
     public void create(Curriculum entity, CurriculumRequestDto dto) {
         if (!dto.education().isBlank()) {
             entity.getEducation().add(dto.education());
@@ -28,5 +40,4 @@ public class CurriculumMapper {
             entity.getSkills().add(dto.skills());
         }
     }
-
 }

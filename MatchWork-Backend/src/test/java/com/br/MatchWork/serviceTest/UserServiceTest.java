@@ -69,7 +69,7 @@ public class UserServiceTest {
         );
 
         Login login = new Login("joao@email.com", "senhaCriptografada");
-        user = new User("João Silva", 30, "Rua A, 123", "12345678901", login);
+        user = new User("João Silva", 30, "Rua A, 123", "12345678901", login, null);
         user.setId(1L);
 
         userResponse = new UserResponseDto(
@@ -143,7 +143,7 @@ public class UserServiceTest {
     @Test
     @DisplayName("Find All Users - Success")
     void findAll_Success() {
-        User user2 = new User("Maria", 25, "Rua B", "98765432100", new Login("maria@email.com", "senha"));
+        User user2 = new User("Maria", 25, "Rua B", "98765432100", new Login("maria@email.com", "senha"), null);
         user2.setId(2L);
         UserResponseDto response2 = new UserResponseDto("Maria", 25, "Rua B", "98765432100", "maria@email.com", null, "");
 
@@ -183,7 +183,7 @@ public class UserServiceTest {
             "novaSenha"
         );
 
-        User updatedUser = new User("João Atualizado", 31, "Rua C, 456", "11122233344", user.getLogin());
+        User updatedUser = new User("João Atualizado", 31, "Rua C, 456", "11122233344", user.getLogin(), null);
         updatedUser.setId(1L);
         UserResponseDto updatedResponse = new UserResponseDto(
             "João Atualizado",

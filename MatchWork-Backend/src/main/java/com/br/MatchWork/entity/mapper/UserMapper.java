@@ -3,6 +3,7 @@ package com.br.MatchWork.entity.mapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.br.MatchWork.entity.Curriculum;
 import com.br.MatchWork.entity.Login;
 import com.br.MatchWork.entity.User;
 import com.br.MatchWork.entity.dtos.UserRequestDto;
@@ -23,7 +24,8 @@ public class UserMapper {
             request.age(),
             request.addres(),
             request.cpf(),
-            new Login(request.email(), encode.encode(request.password()))
+            new Login(request.email(), encode.encode(request.password())),
+            new Curriculum()
         );
     }
 

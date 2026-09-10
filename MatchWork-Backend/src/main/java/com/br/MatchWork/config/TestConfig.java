@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.br.MatchWork.entity.Curriculum;
 import com.br.MatchWork.entity.Enterprise;
 import com.br.MatchWork.entity.Job;
 import com.br.MatchWork.entity.Login;
@@ -39,11 +40,11 @@ public class TestConfig implements CommandLineRunner {
         Role r1 = new Role("BASIC", "Permissões para Usuários Básicos");
         Role r2 = new Role("ENTERPRISE", "Permissões específicas para Empresas");
         
-        User u1 = new User("Verônica", 18, "Brasilia/DF", "1234567", new Login("veve@email.com", encode.encode("12345678")));
-        User u2 = new User("Mariana", 24, "Brasilia/DF", "1234567", new Login("may@email.com", encode.encode("12345678")));
-        User u3 = new User("Gustavo", 25, "Brasilia/DF", "1234567", new Login("gu@email.com", encode.encode("12345678")));
-        User u4 = new User("Robert", 30, "Aguas Lindas/GO", "1234567", new Login("rob@email.com", encode.encode("12345678")));
-        User u5 = new User("Spinelli", 42, "Rio de Janeiro/RJ", "1234567", new Login("spi@email.com", encode.encode("12345678")));
+        User u1 = new User("Verônica", 18, "Brasilia/DF", "1234567", new Login("veve@email.com", encode.encode("12345678")), new Curriculum());
+        User u2 = new User("Mariana", 24, "Brasilia/DF", "1234567", new Login("may@email.com", encode.encode("12345678")), new Curriculum());
+        User u3 = new User("Gustavo", 25, "Brasilia/DF", "1234567", new Login("gu@email.com", encode.encode("12345678")), new Curriculum());
+        User u4 = new User("Robert", 30, "Aguas Lindas/GO", "1234567", new Login("rob@email.com", encode.encode("12345678")), new Curriculum());
+        User u5 = new User("Spinelli", 42, "Rio de Janeiro/RJ", "1234567", new Login("spi@email.com", encode.encode("12345678")), new Curriculum());
         u1.getLogin().getRoles().add(r1);
         u2.getLogin().getRoles().add(r1);
         u3.getLogin().getRoles().add(r1);
@@ -67,16 +68,10 @@ public class TestConfig implements CommandLineRunner {
         Job j2 = new Job("Chefe de Cozinha", "Chefe de cozinha no restaurante BFF BEEF", "Preparar Alimentos e Guarnições", "5 anos de êxperiencia como cheffe em restaurantes especialiados em comida vegana", "Bônus Extras: Bonificação por desempenho do Restaurante, VA, VT, Afiliação com PetShop", JobModel.INPERSON, TypeContract.CLT_PERMANENT, LocalDate.now());
         Job j3 = new Job("Graçom", "Garçom experiênte", "Servir com delicadeza e simpatia", "Experiência servindo e limpando mesas, e abrindo e servindo vinhos", "Bônus Extras: VA, VL, Goreta de 10%", JobModel.INPERSON, TypeContract.CLT_PERMANENT, LocalDate.now().minusMonths(1L));
         Job j4 = new Job("Mecânico", "Mecânico de carros e motos antigas", "Desmontar, consertar e Montar carros antigos", "Conhecimento e experiêcia em reforma de carros antigos", "Bônus Extras: VA ou VR, VL, Boificação por Metas", JobModel.INPERSON, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j5 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j6 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j7 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j8 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j9 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
-        Job j10 = new Job("Desenvolvedor JR", "Desenvolvedor Java Junior", "Desenvolver Sistemas", "Formação em TI", "Bônus Extras", JobModel.REMOTE, TypeContract.CLT_PERMANENT, LocalDate.now());
         j1.setEnterprise(e1);
-        j1.setEnterprise(e2);
-        j1.setEnterprise(e2);
-        j1.setEnterprise(e3);
+        j2.setEnterprise(e2);
+        j3.setEnterprise(e2);
+        j4.setEnterprise(e3);
         jobRepo.saveAll(Arrays.asList(j1, j2, j3, j4));
 
         e1.getJobs().add(j1);

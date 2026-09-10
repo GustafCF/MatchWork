@@ -30,6 +30,12 @@ public class CurriculumServiceImpl implements CurriculumService {
         userRepo.save(user);
         return mapper.toResponse(user.getCurriculum());
     }
-    
 
+    @Override
+    public CurriculumResponseDto removeInfo(String email, CurriculumRequestDto dto) {
+        User user = userRepo.findByLogin_Email(email).orElseThrow(() -> new ResourceNotFoundException(email));
+        mapper.remove(user.getCurriculum(), dto);
+        userRepo.save(user);
+        return mapper.toResponse(user.getCurriculum());
+    }
 }
