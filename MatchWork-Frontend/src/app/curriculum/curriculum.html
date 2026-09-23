@@ -1,1 +1,66 @@
-<p>curriculum works!</p>
+<div class="container">
+    @if (showEditBtn) {
+        <form class="frm" (ngSubmit)="createCurriculum()">
+            <label for="education">Educação</label>
+            <input 
+                type="text" 
+                name="education" 
+                id="education"
+                [(ngModel)] = "request.education"
+            >
+            <label for="experience">Experiência</label>
+            <input 
+                type="text" 
+                name="experience" 
+                id="experience"
+                [(ngModel)] = "request.experience"
+            >
+            <label for="skills">Habilidades</label>
+            <input 
+                type="text" 
+                name="skills" 
+                id="skills"
+                [(ngModel)] = "request.skills"
+            >
+            <button type="submit" class="bt-add">adicionar</button>
+            <button (click)="cancel()" class="bt-cancel">cancelar</button>
+        </form>
+    }@else {
+        <div class="bt-edit">
+            <button (click)="showEditButton()">editar</button>
+        </div>
+    }
+
+    <h1 class="title">{{ user.name }}</h1>
+    <div class="sub-title">
+        <p class="age">{{ user.age }}</p>
+    </div>
+    <div class="sub-title">
+        <p class="email">{{ user.email }}</p>
+    </div>
+    <div class="sub-title">
+        <p class="addres">{{ user.addres }}</p>
+    </div>
+    
+    <div class="sub-container">
+        <div class="camps">
+            <h2>Formação: </h2>
+            @for (ed of user.curriculum.education; track user.name) {
+                <p>{{ ed }}</p>
+            }
+        </div>
+        <div class="camps">
+            <h2>Experiência: </h2>
+            @for (ex of user.curriculum.experience; track user.name) {
+                <p>{{ ex }}</p>
+            }
+        </div>
+        <div class="camps">
+            <h2>Habilidades: </h2>
+            @for (sk of user.curriculum.skills; track user.name) {
+                <p>{{ sk }}</p>
+            }
+        </div>
+    </div>
+
+</div>

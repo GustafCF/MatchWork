@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montenegrin+Gothic+One&family=Ole&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montenegrin Gothic One", serif;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 gray;
+    margin: auto;
+    border-radius: 8px;
+    background-color: #dfdddd;
+}
+
+.bt-edit {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
+.bt-edit button{
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    width: 10vh;
+    cursor: pointer;
+    border: 2px solid gray;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.frm {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+}
+
+.frm input {
+    margin-right: 15px;
+    border-radius: 10px;
+    border: 2px solid #004cda;
+}
+
+.frm input:focus {
+    outline: 1px solid #0b74dd;
+    height: 25px;
+}
+
+.frm label {
+    margin-right: 3px;
+}
+
+.frm .bt-add {
+    border: none;
+    background-color: #004cda;
+    color: #fff;
+    height: 25px;
+    width: 15vh;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.frm .bt-add:hover {
+    height: 30px;
+    background-color: #0b74dd;
+}
+
+.frm .bt-cancel {
+    border: none;
+    background-color: #e74141;
+    color: #fff;
+    height: 25px;
+    width: 15vh;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.frm .bt-cancel:hover {
+    height: 30px;
+    background-color: #df2828;
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+    width: 90%;
+    background-color: #a5a5a5;
+    border-radius: 8px;
+    margin-bottom: 4px;
+}
+
+.sub-title {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: #a5a5a5;
+    margin-bottom: 4px;
+    border-radius: 8px;
+}
+
+.sub-title .age, .email, .addres{
+    margin-left: 5px;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.camps {
+    width: 100%;
+}

@@ -7,6 +7,12 @@ export interface UserRequestDto {
     password: string;
 }
 
+export interface Curriculum {
+    education: string[];
+    experience: string[];
+    skills: string[];
+}
+
 export interface UserResponseDto {
     name: string;
     age: number;
@@ -14,10 +20,4 @@ export interface UserResponseDto {
     cpf: string;
     email: string;
     curriculum: Curriculum;
-}
-
-export interface Curriculum {
-    education: string[];
-    experiencie: string[];
-    skills: string[];
 }

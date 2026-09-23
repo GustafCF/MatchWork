@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserRequestDto, UserResponseDto } from './cadastro/user.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +10,19 @@ import { UserRequestDto, UserResponseDto } from './cadastro/user.model';
 export class UserService {
   private apiUrl = 'http://localhost:8080/us'
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storage: LocalStorageService
+  ) {}
 
   private getAuthHeader(): HttpHeaders {
-    const token = localStorage.getItem('token');
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}` 
+      'Authorization': `Bearer ${this.storage.getItem('token') ?? ''}`
     });
+  }
+
+  private getEmail(): string | null {
+    return this.storage.getItem('email');
   }
 
   findAll(): Observable<UserResponseDto[]> {
@@ -24,6 +31,10 @@ export class UserService {
 
   findById(id: number): Observable<UserResponseDto> {
     return this.http.get<UserResponseDto>(`${this.apiUrl}/find/${id}`, {headers: this.getAuthHeader()});
+  }
+
+  findByEmail(): Observable<UserResponseDto> {
+    return this.http.get<UserResponseDto>(`${this.apiUrl}/findEmail/${this.getEmail()}`, {headers: this.getAuthHeader()});
   }
 
   insert(user: UserRequestDto): Observable<UserResponseDto> {

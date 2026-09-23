@@ -6,6 +6,6 @@ export interface CurriculumRequestDto {
 
 export interface CurriculumResponseDto {
     education: [],
-    experience: [],
+    experiencie: [],
     skills: []
 }
